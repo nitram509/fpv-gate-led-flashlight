@@ -73,13 +73,13 @@ void animateLed()
   int delta = (time - flyThroughAt);
   if (delta > 500)
   {
-    fill_solid(leds, NUM_LEDS, CHSV( 190, 255, 125));
+    fill_solid(leds, NUM_LEDS, CHSV( 96, 255, 125));
     FastLED.show();
   }
   else if (delta > 400)
   {
     int value = abs(map(delta, 400, 500, 0, 125));
-    fill_solid(leds, NUM_LEDS, CHSV( 190, 255, value));
+    fill_solid(leds, NUM_LEDS, CHSV( 96, 255, value));
     FastLED.show();
   }
   else if (delta > 100)
@@ -91,7 +91,7 @@ void animateLed()
   else if (delta > 0)
   {
     int value = abs(map(delta, 0, 100, 125, 0));
-    fill_solid(leds, NUM_LEDS, CHSV( 190, 255, value));
+    fill_solid(leds, NUM_LEDS, CHSV( 96, 255, value));
     FastLED.show();
   }
 }
@@ -113,6 +113,11 @@ void loop()
 
     if (distance != last_distance && distance < MAX_DISTANCE_CM)
     {
+      {
+        Serial.write("distance:");
+        Serial.print(distance, DEC);
+        Serial.write(" cm\n");
+      }
       if (!flyThroughDetected)
       {
         flyThroughAt  = time;
